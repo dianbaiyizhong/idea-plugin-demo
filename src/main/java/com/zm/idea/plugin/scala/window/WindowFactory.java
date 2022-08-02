@@ -16,13 +16,10 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-
-
-
-        CefApp.getInstance().registerSchemeHandlerFactory("http", "myapp", new CustomSchemeHandlerFactory());
         JBCefBrowser jbCefBrowser = new JBCefBrowser();
         Content content = contentFactory.createContent(jbCefBrowser.getComponent(), "", false);
         toolWindow.getContentManager().addContent(content);
+        CefApp.getInstance().registerSchemeHandlerFactory("http", "myapp", new CustomSchemeHandlerFactory());
 
         jbCefBrowser.loadURL("http://myapp/index.html");
 

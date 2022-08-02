@@ -15,33 +15,42 @@ repositories {
     mavenCentral()
 }
 
-scala {
-    zincVersion.set("1.2.0")
-}
-
+//scala {
+//    zincVersion.set("1.2.0")
+//}
 sourceSets {
-
     main {
-        withConvention(ScalaSourceSet::class) {
-            scala {
-                setSrcDirs(listOf("src/main/scala", "src/main/java"))
-            }
-        }
-        java {
-            setSrcDirs(emptyList<String>())
-        }
-    }
-    test {
-        withConvention(ScalaSourceSet::class) {
-            scala {
-                setSrcDirs(listOf("src/test/scala", "src/test/java"))
-            }
+        scala {
+            setSrcDirs(listOf("src/main/scala", "src/main/java"))
         }
         java {
             setSrcDirs(emptyList<String>())
         }
     }
 }
+//sourceSets {
+//
+//    main {
+//        withConvention(ScalaSourceSet::class) {
+//            scala {
+//                setSrcDirs(listOf("src/main/scala", "src/main/java"))
+//            }
+//        }
+//        java {
+//            setSrcDirs(emptyList<String>())
+//        }
+//    }
+//    test {
+//        withConvention(ScalaSourceSet::class) {
+//            scala {
+//                setSrcDirs(listOf("src/test/scala", "src/test/java"))
+//            }
+//        }
+//        java {
+//            setSrcDirs(emptyList<String>())
+//        }
+//    }
+//}
 
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -52,7 +61,7 @@ intellij {
     plugins.set(listOf(/* Plugin Dependencies */))
 }
 
-dependencies{
+dependencies {
     implementation("org.scala-lang:scala-library:2.11.12")
 }
 
