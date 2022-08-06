@@ -23,7 +23,10 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="myDemo" secondary="false" icon="DemoIcons.ICON_TOOL_WINDOW" anchor="left"
-                    factoryClass="com.zm.idea.plugin.scala.window.WindowFactory" />
+                    factoryClass="com.zm.idea.plugin.window.WindowFactory" />
+
+        <fileEditorProvider implementation="com.zm.idea.plugin.editor.MyEditorEditor"/>
+
     </extensions>
 
 
@@ -32,5 +35,9 @@
             <!-- 将插件放在Tools菜单中的first位置。 -->
             <add-to-group group-id="ToolsMenu" anchor="first" />
         </action>
+
+        <group id="leetcode.editor.note" popup="true" text="note" description="note" icon="DemoIcons.NOTE">
+
+        </group>
     </actions>
 </idea-plugin>

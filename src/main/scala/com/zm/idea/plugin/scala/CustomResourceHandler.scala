@@ -1,4 +1,4 @@
-package org
+package com.zm.idea.plugin.scala
 
 import org.cef.callback.CefCallback
 import org.cef.handler.{CefLoadHandler, CefResourceHandler}

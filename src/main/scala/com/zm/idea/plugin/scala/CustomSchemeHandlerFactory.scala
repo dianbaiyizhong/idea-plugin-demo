@@ -1,4 +1,4 @@
-package org
+package com.zm.idea.plugin.scala
 
 import org.cef.browser.{CefBrowser, CefFrame}
 import org.cef.callback.CefSchemeHandlerFactory
