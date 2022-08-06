@@ -91,7 +91,7 @@ public class ConvergePreview extends UserDataHolderBase implements TextEditor {
 
     @Override
     public @NotNull String getName() {
-        return PluginConstant.LEETCODE_EDITOR_TAB_VIEW;
+        return PluginConstant.DEMO_EDITOR_TAB_VIEW;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.zm.idea.plugin.swing;
 
-import com.zm.idea.plugin.tree.MyTreeRenderer2;
 
 import javax.swing.*;
 

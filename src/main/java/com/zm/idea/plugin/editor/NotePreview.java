@@ -101,7 +101,7 @@ public class NotePreview extends UserDataHolderBase implements FileEditor {
 
 
     private SplitEditorToolbar createToolbarWrapper(JComponent targetComponentForActions) {
-        DefaultActionGroup actionGroup = (DefaultActionGroup) ActionManager.getInstance().getAction(PluginConstant.LEETCODE_EDITOR_NOTE);
+        DefaultActionGroup actionGroup = (DefaultActionGroup) ActionManager.getInstance().getAction(PluginConstant.DEMO_EDITOR_NOTE);
         ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar("Note" + ActionPlaces.TOOLBAR, actionGroup, true);
         actionToolbar.setTargetComponent(targetComponentForActions);
         SplitEditorToolbar splitEditorToolbar = new SplitEditorToolbar(null, actionToolbar);
@@ -117,7 +117,7 @@ public class NotePreview extends UserDataHolderBase implements FileEditor {
 
     @Override
     public @Nls(capitalization = Nls.Capitalization.Title) @NotNull String getName() {
-        return PluginConstant.LEETCODE_EDITOR_TAB_VIEW + " Note";
+        return PluginConstant.DEMO_EDITOR_TAB_VIEW + " Note";
     }
 
     @Override

@@ -10,12 +10,6 @@ public class MyAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project project = e.getProject();
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException ex) {
-            throw new RuntimeException(ex);
-        }
         Messages.showMessageDialog(project, "this is message content", "this message title", Messages.getInformationIcon());
     }
 }

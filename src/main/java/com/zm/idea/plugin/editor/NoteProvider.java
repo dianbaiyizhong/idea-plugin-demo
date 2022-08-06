@@ -53,7 +53,7 @@ public class NoteProvider implements AsyncFileEditorProvider, DumbAware {
 
     @Override
     public @NotNull String getEditorTypeId() {
-        return PluginConstant.LEETCODE_EDITOR_TAB_VIEW + " Note view";
+        return PluginConstant.DEMO_EDITOR_TAB_VIEW + " Note view";
     }
 
     @Override

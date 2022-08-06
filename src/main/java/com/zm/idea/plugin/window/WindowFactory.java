@@ -1,13 +1,11 @@
 package com.zm.idea.plugin.window;
 
-import com.intellij.codeInsight.navigation.BackgroundUpdaterTask;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.AnimatedIcon;
@@ -17,18 +15,15 @@ import com.intellij.ui.treeStructure.Tree;
 import com.zm.idea.plugin.api.DemoApi;
 import com.zm.idea.plugin.constant.PluginConstant;
 import com.zm.idea.plugin.tree.MyTreeRenderer;
-import com.zm.idea.plugin.tree.MyTreeRenderer2;
 import com.zm.idea.plugin.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.File;
-import java.util.concurrent.ExecutionException;
 
 @Slf4j
 public class WindowFactory implements ToolWindowFactory, DumbAware {
@@ -45,18 +40,21 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-//        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-//        JBCefBrowser jbCefBrowser = new JBCefBrowser();
-//        Content content = contentFactory.createContent(jbCefBrowser.getComponent(), "", false);
-//        toolWindow.getContentManager().addContent(content);
-//        CefApp.getInstance().registerSchemeHandlerFactory("http", "myapp", new CustomSchemeHandlerFactory());
-//
-//        jbCefBrowser.loadURL("http://myapp/index.html");
+        /**
+         *         读取web的方法
+         *         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+         *         JBCefBrowser jbCefBrowser = new JBCefBrowser();
+         *         Content content = contentFactory.createContent(jbCefBrowser.getComponent(), "", false);
+         *         toolWindow.getContentManager().addContent(content);
+         *         CefApp.getInstance().registerSchemeHandlerFactory("http", "myapp", new CustomSchemeHandlerFactory());
+         *         jbCefBrowser.loadURL("http://myapp/index.html");
+         */
+
 
 
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Tree tree = new Tree(root);
-        tree.setCellRenderer(new MyTreeRenderer2());
+        tree.setCellRenderer(new MyTreeRenderer());
         root.add(s);
         root.add(t);
         s.add(s1);
@@ -70,7 +68,7 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
 
-                ProgressManager.getInstance().run(new Task.Backgroundable(project, PluginConstant.LEETCODE_EDITOR_OPEN_CODE, false) {
+                ProgressManager.getInstance().run(new Task.Backgroundable(project, PluginConstant.DEMO_EDITOR_OPEN_CODE, false) {
                     @Override
                     public void run(@NotNull ProgressIndicator progressIndicator) {
 
@@ -83,7 +81,6 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
         JLabel loadingLabel = new JLabel("Loading...", new AnimatedIcon.Default(), SwingConstants.CENTER);
         Content loadingContent = contentFactory.createContent(loadingLabel, "", false);
         toolWindow.getContentManager().addContent(loadingContent);
-
         Content treeContent = contentFactory.createContent(tree, "", false);
 
         ProgressManager.getInstance().run(new Task.Backgroundable(project, "getDemoTreeData") {
@@ -92,6 +89,7 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
             public void run(@NotNull ProgressIndicator progressIndicator) {
                 progressIndicator.setIndeterminate(true);
                 String body = DemoApi.getDemoTreeData();
+                
                 ApplicationManager.getApplication().invokeLater(() -> {
                     toolWindow.getContentManager().removeAllContents(false);
                     toolWindow.getContentManager().addContent(treeContent);

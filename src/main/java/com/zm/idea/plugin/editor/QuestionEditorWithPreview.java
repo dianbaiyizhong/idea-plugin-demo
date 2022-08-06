@@ -26,7 +26,7 @@ public class QuestionEditorWithPreview extends TextEditorWithPreview {
     @Nullable
     protected ActionGroup createLeftToolbarActionGroup() {
         if (false) {
-            return (ActionGroup) ActionManager.getInstance().getAction(PluginConstant.LEETCODE_EDITOR_GROUP);
+            return (ActionGroup) ActionManager.getInstance().getAction(PluginConstant.DEMO_EDITOR_GROUP);
         } else {
             return null;
         }
@@ -36,7 +36,7 @@ public class QuestionEditorWithPreview extends TextEditorWithPreview {
     @Nullable
     protected ActionGroup createRightToolbarActionGroup() {
         if (true) {
-            return (ActionGroup) ActionManager.getInstance().getAction(PluginConstant.LEETCODE_EDITOR_GROUP);
+            return (ActionGroup) ActionManager.getInstance().getAction(PluginConstant.DEMO_EDITOR_GROUP);
         } else {
             return null;
         }
