@@ -8,15 +8,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
-public class MyEditorEditor extends SplitTextEditorProvider {
-    public MyEditorEditor() {
+public class MyEditorEditorProvider extends SplitTextEditorProvider {
+    public MyEditorEditorProvider() {
         super(new PsiAwareTextEditorProvider(), new ConvergeProvider(new FileEditorProvider[]{new NoteProvider()}, new String[]{"wiki"}));
     }
 
 
     @Override
     public boolean accept(@NotNull Project project, @NotNull VirtualFile file) {
-        if (file.getPath().endsWith("txt")) {
+        if (file.getPath().endsWith("java")) {
             return true;
         } else {
             return false;

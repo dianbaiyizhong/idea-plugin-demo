@@ -69,7 +69,7 @@ public class NotePreview extends UserDataHolderBase implements FileEditor {
             try {
                 File file = ApplicationManager.getApplication().executeOnPooledThread(() -> {
 
-                    File nodeFile = new File("D:\\project\\doc\\http返回值规约.md");
+                    File nodeFile = new File("D:\\project\\doc\\empty.md");
 //                    FileUtils.openFileEditor(nodeFile, project);
                     return nodeFile;
 

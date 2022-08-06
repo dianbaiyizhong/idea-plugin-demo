@@ -28,29 +28,7 @@ sourceSets {
         }
     }
 }
-//sourceSets {
-//
-//    main {
-//        withConvention(ScalaSourceSet::class) {
-//            scala {
-//                setSrcDirs(listOf("src/main/scala", "src/main/java"))
-//            }
-//        }
-//        java {
-//            setSrcDirs(emptyList<String>())
-//        }
-//    }
-//    test {
-//        withConvention(ScalaSourceSet::class) {
-//            scala {
-//                setSrcDirs(listOf("src/test/scala", "src/test/java"))
-//            }
-//        }
-//        java {
-//            setSrcDirs(emptyList<String>())
-//        }
-//    }
-//}
+
 
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -68,6 +46,10 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.24")
     testCompileOnly("org.projectlombok:lombok:1.18.24")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
+
+    // hutool
+    implementation("cn.hutool:hutool-all:5.8.5")
+
 }
 
 tasks {

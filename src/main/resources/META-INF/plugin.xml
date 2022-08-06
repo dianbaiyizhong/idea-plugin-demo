@@ -1,13 +1,9 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>com.example.idea_plugin_demo</id>
 
-    <!-- Public plugin name should be written in Title Case.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+
     <name>Idea_plugin_demo</name>
 
-    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
@@ -15,29 +11,87 @@
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description>这里是描述</description>
 
-    <!-- Product and plugin compatibility requirements.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+
     <depends>com.intellij.modules.platform</depends>
 
-    <!-- Extension points defined by the plugin.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="myDemo" secondary="false" icon="DemoIcons.ICON_TOOL_WINDOW" anchor="left"
-                    factoryClass="com.zm.idea.plugin.window.WindowFactory" />
+                    factoryClass="com.zm.idea.plugin.window.WindowFactory"/>
 
-        <fileEditorProvider implementation="com.zm.idea.plugin.editor.MyEditorEditor"/>
+        <fileEditorProvider implementation="com.zm.idea.plugin.editor.MyEditorEditorProvider"/>
 
     </extensions>
 
 
     <actions>
-        <action class="com.zm.idea.plugin.demo.MyAction" id="myAction" text="action" description="this is action demo" >
+        <action class="com.zm.idea.plugin.demo.MyAction" id="myAction" text="action" description="this is action demo">
             <!-- 将插件放在Tools菜单中的first位置。 -->
-            <add-to-group group-id="ToolsMenu" anchor="first" />
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
 
-        <group id="leetcode.editor.note" popup="true" text="note" description="note" icon="DemoIcons.NOTE">
 
+        <group id="demo.editor.group">
+            <action id="demo.editor.RunCodeAction" class="com.zm.idea.plugin.demo.MyAction"
+                    text="Run Code" description="Run Code(editor)" icon="DemoIcons.RUN">
+            </action>
+            <action id="demo.editor.TestcaseAction"
+                    class="com.zm.idea.plugin.demo.MyAction"
+                    text="Testcase" description="Test case(editor)" icon="DemoIcons.EDIT_DOC">
+            </action>
+            <separator/>
+            <action id="demo.editor.SubmitAction" class="com.zm.idea.plugin.demo.MyAction"
+                    text="Submit" description="Submit(editor)" icon="DemoIcons.SUBMIT">
+            </action>
+            <action id="demo.editor.SubmissionsAction"
+                    class="com.zm.idea.plugin.demo.MyAction"
+                    text="Submissions" description="Submissions(editor)" icon="DemoIcons.HISTORY">
+            </action>
+            <separator/>
+            <action id="demo.editor.OpenContentAction"
+                    class="com.zm.idea.plugin.demo.MyAction"
+                    text="open content" description="open content(editor)" icon="DemoIcons.DESC">
+            </action>
+            <action id="demo.editor.OpenSolutionAction"
+                    class="com.zm.idea.plugin.demo.MyAction"
+                    text="open solution" description="open solution" icon="DemoIcons.SOLUTION">
+            </action>
+            <action id="demo.editor.OpenInWebAction"
+                    class="com.zm.idea.plugin.demo.MyAction"
+                    text="open in web" description="open in web(editor)" icon="DemoIcons.POPUP">
+            </action>
+            <separator/>
+            <action id="demo.positionAction" class="com.zm.idea.plugin.demo.MyAction"
+                    text="position" description="position" icon="DemoIcons.POSITION"/>
+            <group id="demo.editor.note" popup="true" text="note" description="note"
+                   icon="DemoIcons.NOTE">
+                <action id="demo.editor.ShowNote"
+                        class="com.zm.idea.plugin.demo.MyAction"
+                        text="ShowNote" description="Show Note" icon="DemoIcons.SHOW">
+                </action>
+                <action id="demo.editor.PullNote" class="com.zm.idea.plugin.demo.MyAction"
+                        text="PullNote" description="Pull Note" icon="DemoIcons.PULL">
+                </action>
+                <action id="demo.editor.PushNote" class="com.zm.idea.plugin.demo.MyAction"
+                        text="PushNote" description="Push Note" icon="DemoIcons.PUSH">
+                </action>
+            </group>
+            <group id="demo.editor.timer" popup="true" text="Timer" description="timer(editor)"
+                   icon="DemoIcons.TIME">
+                <action id="demo.editor.StartTimeAction"
+                        class="com.zm.idea.plugin.demo.MyAction"
+                        text="Start" description="Start Time(editor)">
+                </action>
+                <action id="demo.editor.StopTimeAction"
+                        class="com.zm.idea.plugin.demo.MyAction"
+                        text="Stop" description="Stop Time(editor)">
+                </action>
+                <action id="demo.editor.ResetTimeAction"
+                        class="com.zm.idea.plugin.demo.MyAction"
+                        text="Reset" description="Reset Time(editor)">
+                </action>
+            </group>
         </group>
+
     </actions>
 </idea-plugin>
