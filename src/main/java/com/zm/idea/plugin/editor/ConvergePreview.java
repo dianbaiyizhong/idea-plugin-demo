@@ -20,9 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.beans.PropertyChangeListener;
 
-/**
- * @author shuzijun
- */
+
 public class ConvergePreview extends UserDataHolderBase implements TextEditor {
 
     private final Project project;
@@ -35,7 +33,6 @@ public class ConvergePreview extends UserDataHolderBase implements TextEditor {
     private JComponent myComponent;
     private JBEditorTabs jbEditorTabs;
 
-    private CodeEntity leetcodeEditor;
 
     public ConvergePreview(@NotNull FileEditor[] fileEditors, String[] names, Project project, VirtualFile file) {
         this.project = project;
@@ -57,16 +54,12 @@ public class ConvergePreview extends UserDataHolderBase implements TextEditor {
             jbEditorTabs = new JBEditorTabs(project, IdeFocusManager.getInstance(project), this);
 
 
-//            for (int i = 0; i < fileEditors.length; i++) {
-//                TabInfo tabInfo = new TabInfo(fileEditors[i].getComponent());
-//                tabInfo.setText(names[i]);
-//                tabInfos[i] = tabInfo;
-//                jbEditorTabs.addTab(tabInfo);
-//            }
-            TabInfo tabInfo = new TabInfo(fileEditors[0].getComponent());
-            tabInfo.setText(names[0]);
-            tabInfos[0] = tabInfo;
-            jbEditorTabs.addTab(tabInfo);
+            for (int i = 0; i < fileEditors.length; i++) {
+                TabInfo tabInfo = new TabInfo(fileEditors[i].getComponent());
+                tabInfo.setText(names[i]);
+                tabInfos[i] = tabInfo;
+                jbEditorTabs.addTab(tabInfo);
+            }
             jbEditorTabs.addListener(new TabsListener() {
                 @Override
                 public void selectionChanged(TabInfo oldSelection, TabInfo newSelection) {
@@ -79,6 +72,8 @@ public class ConvergePreview extends UserDataHolderBase implements TextEditor {
                 }
             });
             myComponent = JBUI.Panels.simplePanel(jbEditorTabs);
+
+            // 激活第一个选项卡，也就是【wiki】
             fileEditors[0].setState(TabFileEditorState.TabFileEditorLoadState);
         }
         return myComponent;
@@ -205,53 +200,6 @@ public class ConvergePreview extends UserDataHolderBase implements TextEditor {
 
         public String getChildrenState() {
             return childrenState;
-        }
-
-        @Override
-        public boolean canBeMergedWith(@NotNull FileEditorState otherState, @NotNull FileEditorStateLevel level) {
-            return false;
-        }
-
-    }
-
-    public static class LoginState implements FileEditorState {
-
-        public static LoginState NoLoginNoSelect = new LoginState(false, false);
-        public static LoginState NoLoginSelect = new LoginState(false, true);
-        public static LoginState LoginNoSelect = new LoginState(true, false);
-        public static LoginState LoginSelect = new LoginState(true, true);
-
-        public static LoginState getState(boolean login, boolean select) {
-            if (login) {
-                if (select) {
-                    return LoginSelect;
-                } else {
-                    return LoginNoSelect;
-                }
-            } else {
-                if (select) {
-                    return NoLoginSelect;
-                } else {
-                    return NoLoginNoSelect;
-                }
-            }
-        }
-
-        private boolean login;
-
-        private boolean select;
-
-        public LoginState(boolean login, boolean select) {
-            this.login = login;
-            this.select = select;
-        }
-
-        public boolean isLogin() {
-            return login;
-        }
-
-        public boolean isSelect() {
-            return select;
         }
 
         @Override

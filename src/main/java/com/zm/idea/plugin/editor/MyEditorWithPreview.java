@@ -14,49 +14,32 @@ import com.zm.idea.plugin.constant.PluginConstant;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class QuestionEditorWithPreview extends TextEditorWithPreview {
-    public static final Key<QuestionEditorWithPreview> PARENT_SPLIT_EDITOR_KEY = Key.create(PluginConstant.PLUGIN_ID + "Question Split");
+public class MyEditorWithPreview extends TextEditorWithPreview {
+    public static final Key<MyEditorWithPreview> PARENT_SPLIT_EDITOR_KEY = Key.create(PluginConstant.PLUGIN_ID + "Question Split");
 
-    public QuestionEditorWithPreview(@NotNull TextEditor editor, @NotNull FileEditor preview) {
-        super(editor, preview, "Question Editor", Layout.SHOW_EDITOR_AND_PREVIEW);
+    public MyEditorWithPreview(@NotNull TextEditor editor, @NotNull FileEditor preview) {
+        super(editor, preview, "My Editor", Layout.SHOW_EDITOR_AND_PREVIEW);
         editor.putUserData(PARENT_SPLIT_EDITOR_KEY, this);
         preview.putUserData(PARENT_SPLIT_EDITOR_KEY, this);
     }
 
     @Nullable
     protected ActionGroup createLeftToolbarActionGroup() {
-        if (false) {
-            return (ActionGroup) ActionManager.getInstance().getAction(PluginConstant.DEMO_EDITOR_GROUP);
-        } else {
-            return null;
-        }
-
+        return null;
     }
 
     @Nullable
     protected ActionGroup createRightToolbarActionGroup() {
-        if (true) {
-            return (ActionGroup) ActionManager.getInstance().getAction(PluginConstant.DEMO_EDITOR_GROUP);
-        } else {
-            return null;
-        }
+        // 为左边的java编辑器视图增加按钮
+        return (ActionGroup) ActionManager.getInstance().getAction(PluginConstant.DEMO_EDITOR_GROUP);
     }
 
     @NotNull
     protected ActionGroup createViewActionGroup() {
-        if (true) {
-            return new DefaultActionGroup(
-                    getShowEditorAndPreviewAction(),
-                    getShowPreviewAction()
-            );
-        } else {
-            return new DefaultActionGroup(
-                    getShowEditorAction(),
-                    getShowEditorAndPreviewAction()
-            );
-        }
-
-
+        return new DefaultActionGroup(
+                getShowEditorAndPreviewAction(),
+                getShowPreviewAction()
+        );
     }
 
     @Nullable
@@ -80,18 +63,10 @@ public class QuestionEditorWithPreview extends TextEditorWithPreview {
 
     @NotNull
     public TextEditor getTextEditor() {
-        if (true) {
-            if (((TextEditor) myPreview).getEditor() == null) {
-                return myEditor;
-            }
-            return (TextEditor) myPreview;
-        } else {
-            if ((myEditor).getEditor() == null) {
-                return (TextEditor) myPreview;
-            }
+        if (((TextEditor) myPreview).getEditor() == null) {
             return myEditor;
         }
-
+        return (TextEditor) myPreview;
     }
 
     public FileEditor getPreviewEditor() {

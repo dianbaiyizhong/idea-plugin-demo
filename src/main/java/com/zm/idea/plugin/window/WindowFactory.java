@@ -9,6 +9,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.AnimatedIcon;
+import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.treeStructure.Tree;
@@ -51,7 +52,6 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
          */
 
 
-
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Tree tree = new Tree(root);
         tree.setCellRenderer(new MyTreeRenderer());
@@ -63,6 +63,10 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
         t.add(t1);
         t.add(t2);
 
+
+        // 为tree设置一个可滚动的面板
+        JBScrollPane jbScrollPane = new JBScrollPane(tree);
+        jbScrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 
         tree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
@@ -81,7 +85,7 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
         JLabel loadingLabel = new JLabel("Loading...", new AnimatedIcon.Default(), SwingConstants.CENTER);
         Content loadingContent = contentFactory.createContent(loadingLabel, "", false);
         toolWindow.getContentManager().addContent(loadingContent);
-        Content treeContent = contentFactory.createContent(tree, "", false);
+        Content treeContent = contentFactory.createContent(jbScrollPane, "", false);
 
         ProgressManager.getInstance().run(new Task.Backgroundable(project, "getDemoTreeData") {
 
@@ -89,7 +93,7 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
             public void run(@NotNull ProgressIndicator progressIndicator) {
                 progressIndicator.setIndeterminate(true);
                 String body = DemoApi.getDemoTreeData();
-                
+
                 ApplicationManager.getApplication().invokeLater(() -> {
                     toolWindow.getContentManager().removeAllContents(false);
                     toolWindow.getContentManager().addContent(treeContent);

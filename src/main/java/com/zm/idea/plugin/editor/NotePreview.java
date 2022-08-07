@@ -19,7 +19,6 @@ import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.components.BorderLayoutPanel;
 import com.zm.idea.plugin.constant.PluginConstant;
 import com.zm.idea.plugin.entity.CodeEntity;
-import com.zm.idea.plugin.utils.FileUtils;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -68,11 +67,8 @@ public class NotePreview extends UserDataHolderBase implements FileEditor {
             myComponent.addToCenter(loadingLabel);
             try {
                 File file = ApplicationManager.getApplication().executeOnPooledThread(() -> {
-
                     File nodeFile = new File("D:\\project\\doc\\empty.md");
-//                    FileUtils.openFileEditor(nodeFile, project);
                     return nodeFile;
-
                 }).get();
                 if (file == null || !file.exists()) {
                     myComponent.addToCenter(new JBLabel("No note"));

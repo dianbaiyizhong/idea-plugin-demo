@@ -19,21 +19,9 @@ public class TreeItem extends JPanel {
         this.check.setMargin(new Insets(0, 0, 0, 0));
         Border margin = new EmptyBorder(0, 10, 0, 0);
         label.setBorder(margin);
-//        setLayout(new BorderLayout());
-//        setLayout(new FlowLayout());
-        GridLayout gl = new GridLayout(1, 2);//设计几行几列
-//        setLayout(gl);
-//        add(check, BorderLayout.WEST);
-//        add(label2, BorderLayout.WEST);
-//        add(label, BorderLayout.CENTER);
         add(label2);
         label2.setIcon(new ImageIcon("D:\\project\\idea-plugin-demo\\src\\main\\resources\\icons\\note.svg"));
         add(label);
-
-
-
-
-
 
     }
 

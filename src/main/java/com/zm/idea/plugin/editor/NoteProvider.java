@@ -11,9 +11,7 @@ import com.zm.idea.plugin.constant.PluginConstant;
 import com.zm.idea.plugin.entity.CodeEntity;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author shuzijun
- */
+
 public class NoteProvider implements AsyncFileEditorProvider, DumbAware {
 
     private FileEditor fileEditor;
@@ -40,7 +38,6 @@ public class NoteProvider implements AsyncFileEditorProvider, DumbAware {
     public boolean accept(@NotNull Project project, @NotNull VirtualFile file) {
         if (file.getPath().endsWith("md")) {
             return true;
-
         } else {
             return false;
         }

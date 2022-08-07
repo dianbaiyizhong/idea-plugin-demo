@@ -37,6 +37,6 @@ public class MyEditorEditorProvider extends SplitTextEditorProvider {
 
     @Override
     protected FileEditor createSplitEditor(@NotNull FileEditor firstEditor, @NotNull FileEditor secondEditor) {
-        return new QuestionEditorWithPreview((TextEditor) secondEditor, firstEditor);
+        return new MyEditorWithPreview((TextEditor) secondEditor, firstEditor);
     }
 }
