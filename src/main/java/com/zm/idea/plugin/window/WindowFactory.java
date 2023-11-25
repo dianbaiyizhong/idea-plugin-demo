@@ -15,6 +15,7 @@ import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.treeStructure.Tree;
 import com.zm.idea.plugin.api.DemoApi;
 import com.zm.idea.plugin.constant.PluginConstant;
+import com.zm.idea.plugin.listener.TreeMouseListener;
 import com.zm.idea.plugin.tree.MyTreeRenderer;
 import com.zm.idea.plugin.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -68,20 +69,27 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
         JBScrollPane jbScrollPane = new JBScrollPane(tree);
         jbScrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 
-        tree.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
+//        tree.addTreeSelectionListener(new TreeSelectionListener() {
+//            @Override
+//            public void valueChanged(TreeSelectionEvent e) {
+//
+//                ProgressManager.getInstance().run(new Task.Backgroundable(project, PluginConstant.DEMO_EDITOR_OPEN_CODE, false) {
+//                    @Override
+//                    public void run(@NotNull ProgressIndicator progressIndicator) {
+//
+//                        FileUtils.openFileEditorAndSaveState(new File("D:\\project\\idea-plugin-demo\\src\\main\\java\\com\\zm\\idea\\plugin\\api\\DemoApi.java"), project, true);
+//                    }
+//                });
+//
+//            }
+//        });
 
-                ProgressManager.getInstance().run(new Task.Backgroundable(project, PluginConstant.DEMO_EDITOR_OPEN_CODE, false) {
-                    @Override
-                    public void run(@NotNull ProgressIndicator progressIndicator) {
 
-                        FileUtils.openFileEditorAndSaveState(new File("D:\\project\\idea-plugin-demo\\src\\main\\java\\com\\zm\\idea\\plugin\\api\\DemoApi.java"), project, true);
-                    }
-                });
+        tree.addMouseListener(new TreeMouseListener(tree,project));
 
-            }
-        });
+
+
+
         JLabel loadingLabel = new JLabel("Loading...", new AnimatedIcon.Default(), SwingConstants.CENTER);
         Content loadingContent = contentFactory.createContent(loadingLabel, "", false);
         toolWindow.getContentManager().addContent(loadingContent);

@@ -19,9 +19,14 @@
         <toolWindow id="myDemo" secondary="false" icon="DemoIcons.ICON_TOOL_WINDOW" anchor="left"
                     factoryClass="com.zm.idea.plugin.window.WindowFactory"/>
 
+        <postStartupActivity implementation="com.zm.idea.plugin.core.MyStartupActivity"/>
+
+
         <!--注册一个文件编辑提供者，当打开java文件或者md文件的时候，使用自定义的面板去显示内容-->
         <fileEditorProvider implementation="com.zm.idea.plugin.editor.MyEditorEditorProvider"/>
-
+        <moduleType
+                id="DEMO_MODULE_TYPE"
+                implementationClass="com.zm.idea.plugin.wizard.DemoModuleType"/>
     </extensions>
 
 
